@@ -9,7 +9,6 @@ import CustomFormField from "../shared/CustomFormField";
 import SubmitButton from "../shared/SubmitButton";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FormFieldType {
@@ -22,7 +21,7 @@ export enum FormFieldType {
   SKELETON = "skeleton",
 }
 const formSchema = z.object({
-  fullName: z
+  name: z
     .string()
     .min(2, "Name must be at least 2 characters")
     .max(50, "Name must be at most 50 characters"),
@@ -39,7 +38,7 @@ export default function PatientForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
       phone: "",
     },
@@ -51,7 +50,7 @@ export default function PatientForm() {
       const userData = values;
       const user = await createUser(userData);
       setIsLoading(false);
-      if (user) router.push(`/patients/${user.id}/register`);
+      if (user) router.push(`/patients/${user.$id}/register`);
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +68,7 @@ export default function PatientForm() {
         <CustomFormField
           control={form.control}
           fieldType={FormFieldType.INPUT}
-          name="fullName"
+          name="name"
           label="Full name"
           placeholder="Arab Bilal"
           icon="/assets/icons/user.svg"

@@ -16,20 +16,7 @@ export default function SubmitButton(props: SubmitButtonProps) {
       className={cn("w-full text-base font-bold", props.className)}
       disabled={props.isLoading}
     >
-      {props.isLoading ? (
-        <div className="flex">
-          <Image
-            src={"/assets/icons/loader.svg"}
-            alt="loader"
-            width={24}
-            height={24}
-            className="animate-spin"
-          />
-          <p>Loading ...</p>
-        </div>
-      ) : (
-        props.children
-      )}
+      {props.isLoading ? <p>Loading ...</p> : props.children}
     </Button>
   );
 }

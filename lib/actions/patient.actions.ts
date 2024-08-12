@@ -11,7 +11,7 @@ export async function createUser(user: CreateUserParams) {
       user.email,
       user.phone,
       undefined,
-      user.fullName
+      user.name
     );
     return parseStringify(newUser);
   } catch (error: any) {
@@ -19,5 +19,14 @@ export async function createUser(user: CreateUserParams) {
       const documents = await users.list([Query.equal("email", user.email)]);
       return documents?.users[0];
     }
+  }
+}
+
+export async function getUser(userId: string) {
+  try {
+    const user = await users.get(userId);
+    return parseStringify(user);
+  } catch (error) {
+    console.error(error);
   }
 }
