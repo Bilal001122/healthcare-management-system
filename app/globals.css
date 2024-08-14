@@ -61,23 +61,23 @@
     --chart-5: 340 75% 55%;
   }
   /* Remove scrollbar */
-  .remove-scrollbar::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-    border-radius: 0px;
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
   }
 
-  .remove-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--card));
   }
 
-  .remove-scrollbar::-webkit-scrollbar-thumb {
-    background: transparent;
-    border-radius: 0px;
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 50px;
   }
 
-  .remove-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: transparent;
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7878a3;
   }
 }
 

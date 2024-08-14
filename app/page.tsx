@@ -6,7 +6,7 @@ import onBardingImg from "@/public/assets/images/onboarding-img.png";
 export default function Page() {
   return (
     <div className="flex-1 flex">
-      <div className="remove-scrollbar flex-1 md:w-[50%] flex flex-col overflow-y-auto px-10 md:px-12 xl:px-32 py-6">
+      <div className="custom-scrollbar flex-1 md:w-[50%] flex flex-col overflow-y-auto px-10 md:px-12 xl:px-32 py-6">
         <div className="flex flex-col flex-1 justify-between">
           <Image
             src={"/assets/icons/logo-full.svg"}
