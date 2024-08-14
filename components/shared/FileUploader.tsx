@@ -12,9 +12,12 @@ export default function FileUploader({
   files: File[] | undefined;
   onChange: (files: File[]) => void;
 }) {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    onChange(acceptedFiles);
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      onChange(acceptedFiles);
+    },
+    [onChange]
+  );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
