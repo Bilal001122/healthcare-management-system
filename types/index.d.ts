@@ -3,7 +3,7 @@
 //   searchParams: { [key: string]: string | string[] | undefined };
 // };
 
-declare type Gender = "Male" | "Female" | "Other";
+declare type Gender = "Male" | "Female";
 declare type Status = "pending" | "scheduled" | "cancelled";
 
 declare interface CreateUserParams {

@@ -5,7 +5,7 @@ import onBardingImg from "@/public/assets/images/onboarding-img.png";
 
 export default function Page() {
   return (
-    <section className="flex-1 flex">
+    <div className="flex-1 flex">
       <div className="remove-scrollbar flex-1 md:w-[50%] flex flex-col overflow-y-auto px-10 md:px-12 xl:px-32 py-6">
         <div className="flex flex-col flex-1 justify-between">
           <Image
@@ -15,7 +15,7 @@ export default function Page() {
             style={{ width: "200px", height: "100px" }}
             priority
             alt="CarePulse logo"
-            className="object-contain"
+            className="object-contain mt-5"
           />
           <PatientForm />
           <div className="text-base flex justify-between items-center mt-4">
@@ -43,6 +43,6 @@ export default function Page() {
           className="object-cover rounded-tl-2xl rounded-bl-2xl"
         />
       </div>
-    </section>
+    </div>
   );
 }

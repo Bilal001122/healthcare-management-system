@@ -77,6 +77,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        inputBorder: "hsl(var(--input-border))",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],

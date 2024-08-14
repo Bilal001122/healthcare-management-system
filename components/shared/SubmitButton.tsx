@@ -12,8 +12,8 @@ export default function SubmitButton(props: SubmitButtonProps) {
   return (
     <Button
       type="submit"
-      size="lg"
-      className={cn("w-full text-base font-bold", props.className)}
+      size="default"
+      className={cn("w-full text-sm font-bold", props.className)}
       disabled={props.isLoading}
     >
       {props.isLoading ? <p>Loading ...</p> : props.children}
