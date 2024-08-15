@@ -11,7 +11,6 @@ import {
   storage,
   users,
 } from "../appwrite.config";
-import { parseStringify } from "../utils";
 import { InputFile } from "node-appwrite/file";
 
 export async function createUser(user: CreateUserParams) {
@@ -23,7 +22,7 @@ export async function createUser(user: CreateUserParams) {
       undefined,
       user.name
     );
-    return parseStringify(newUser);
+    return newUser;
   } catch (error: any) {
     if (error && error?.code === 409) {
       const documents = await users.list([Query.equal("email", user.email)]);
@@ -35,7 +34,7 @@ export async function createUser(user: CreateUserParams) {
 export async function getUser(userId: string) {
   try {
     const user = await users.get(userId);
-    return parseStringify(user);
+    return user;
   } catch (error) {
     console.error(error);
   }
@@ -66,7 +65,20 @@ export async function registerPatient({
       }
     );
 
-    return parseStringify(patient);
+    return patient;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getPatient(userId: string) {
+  try {
+    const patient = await databases.listDocuments(
+      DATABASE_ID!,
+      PATIENT_COLLECTION_ID!,
+      [Query.equal("userId", userId)]
+    );
+    return patient.documents[0];
   } catch (error) {
     console.error(error);
   }

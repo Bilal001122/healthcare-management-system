@@ -119,7 +119,6 @@ export default function RegisterForm({ user }: { user: User }) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     let formData;
-
     if (
       values.identificationDocument &&
       values.identificationDocument.length > 0
@@ -147,6 +146,7 @@ export default function RegisterForm({ user }: { user: User }) {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -171,7 +171,7 @@ export default function RegisterForm({ user }: { user: User }) {
           iconAlt="user"
         />
 
-        <div className="flex flex-col flex-1 gap-8 xl:flex-row">
+        <div className="flex flex-col gap-8 xl:flex-row">
           <div className="flex-1">
             <CustomFormField
               control={form.control}
@@ -195,7 +195,7 @@ export default function RegisterForm({ user }: { user: User }) {
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 gap-8 xl:flex-row">
+        <div className="flex flex-col gap-8 xl:flex-row">
           <div className="flex-1">
             <CustomFormField
               control={form.control}
@@ -237,7 +237,7 @@ export default function RegisterForm({ user }: { user: User }) {
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 gap-8 xl:flex-row">
+        <div className="flex flex-col gap-8 xl:flex-row">
           <div className="flex-1">
             <CustomFormField
               control={form.control}
@@ -258,7 +258,7 @@ export default function RegisterForm({ user }: { user: User }) {
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 gap-8 xl:flex-row">
+        <div className="flex flex-col gap-8 xl:flex-row">
           <div className="flex-1">
             <CustomFormField
               control={form.control}
@@ -305,7 +305,7 @@ export default function RegisterForm({ user }: { user: User }) {
           ))}
         </CustomFormField>
 
-        <div className="flex flex-col flex-1 gap-8 xl:flex-row">
+        <div className="flex flex-col gap-8 xl:flex-row">
           <div className="flex-1">
             <CustomFormField
               control={form.control}
@@ -326,7 +326,7 @@ export default function RegisterForm({ user }: { user: User }) {
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 gap-8 xl:flex-row">
+        <div className="flex flex-col gap-8 xl:flex-row">
           <div className="flex-1">
             <CustomFormField
               control={form.control}
@@ -347,7 +347,7 @@ export default function RegisterForm({ user }: { user: User }) {
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 gap-8 xl:flex-row">
+        <div className="flex flex-col gap-8 xl:flex-row">
           <div className="flex-1">
             <CustomFormField
               control={form.control}

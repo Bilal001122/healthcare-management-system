@@ -49,11 +49,11 @@ export default function PatientForm() {
     try {
       const userData = values;
       const user = await createUser(userData);
-      setIsLoading(false);
       if (user) router.push(`/patients/${user.$id}/register`);
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   }
 
   return (
