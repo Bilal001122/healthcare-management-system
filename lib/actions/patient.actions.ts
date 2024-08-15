@@ -13,19 +13,21 @@ import {
 } from "../appwrite.config";
 import { InputFile } from "node-appwrite/file";
 
-export async function createUser(user: CreateUserParams) {
+export async function createUser(userData: CreateUserParams) {
   try {
-    const newUser = await users.create(
+    const user = await users.create(
       ID.unique(),
-      user.email,
-      user.phone,
+      userData.email,
+      userData.phone,
       undefined,
-      user.name
+      userData.name
     );
-    return newUser;
+    return user;
   } catch (error: any) {
     if (error && error?.code === 409) {
-      const documents = await users.list([Query.equal("email", user.email)]);
+      const documents = await users.list([
+        Query.equal("email", userData.email),
+      ]);
       return documents?.users[0];
     }
   }

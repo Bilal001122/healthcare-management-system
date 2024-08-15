@@ -13,7 +13,9 @@ import { DOCTORS } from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-const formSchema = z.object({
+import { createAppointment } from "@/lib/actions/appointment.actions";
+
+const CreateAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
   schedule: z.coerce.date(),
   reason: z
@@ -23,6 +25,36 @@ const formSchema = z.object({
   note: z.string().optional(),
   cancellationReason: z.string().optional(),
 });
+
+const ScheduleAppointmentSchema = z.object({
+  primaryPhysician: z.string().min(2, "Select at least one doctor"),
+  schedule: z.coerce.date(),
+  reason: z.string().optional(),
+  note: z.string().optional(),
+  cancellationReason: z.string().optional(),
+});
+
+const CancelAppointmentSchema = z.object({
+  primaryPhysician: z.string().min(2, "Select at least one doctor"),
+  schedule: z.coerce.date(),
+  reason: z.string().optional(),
+  note: z.string().optional(),
+  cancellationReason: z
+    .string()
+    .min(2, "Reason must be at least 2 characters")
+    .max(500, "Reason must be at most 500 characters"),
+});
+
+function getAppointmentSchema(type: string) {
+  switch (type) {
+    case "create":
+      return CreateAppointmentSchema;
+    case "cancel":
+      return CancelAppointmentSchema;
+    default:
+      return ScheduleAppointmentSchema;
+  }
+}
 
 export default function AppointmentForm({
   userId,
@@ -36,6 +68,7 @@ export default function AppointmentForm({
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  const formSchema = getAppointmentSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,10 +82,42 @@ export default function AppointmentForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
+    let status: Status;
+    switch (type) {
+      case "schedule":
+        status = "scheduled";
+        break;
+      case "cancel":
+        status = "cancelled";
+        break;
+      default:
+        status = "pending";
+        break;
+    }
     try {
+      if (type === "create" && patientId) {
+        const appointmentData = {
+          userId,
+          patient: patientId,
+          primaryPhysician: values.primaryPhysician,
+          schedule: new Date(values.schedule),
+          reason: values.reason!,
+          note: values.note,
+          status,
+        };
+        const appointment = await createAppointment(appointmentData);
+
+        if (appointment) {
+          form.reset();
+          router.push(
+            `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`
+          );
+        }
+      }
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   }
 
   let buttonLabel;
