@@ -22,3 +22,16 @@ export async function createAppointment(
     console.error(error);
   }
 }
+
+export async function getAppointment(appointmentId: string) {
+  try {
+    const appointment = databases.getDocument(
+      DATABASE_ID!,
+      APPOINTMENT_COLLECTION_ID!,
+      appointmentId
+    );
+    return appointment;
+  } catch (error) {
+    console.error(error);
+  }
+}
