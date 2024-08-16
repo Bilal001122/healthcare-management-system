@@ -1,4 +1,4 @@
-export const GENDER_OPTIONS = ["Male", "Female"];
+export const GENDER_OPTIONS = ["Male", "Female"] as const;
 
 export const IDENTIFICATION_TYPES = [
   "Birth Certificate",
@@ -12,7 +12,7 @@ export const IDENTIFICATION_TYPES = [
   "State ID Card",
   "Student ID Card",
   "Voter ID Card",
-];
+] as const;
 
 export const DOCTORS = [
   {
@@ -51,10 +51,10 @@ export const DOCTORS = [
     image: "/assets/images/dr-sharma.png",
     name: "Hardik Sharma",
   },
-];
+] as const;
 
 export const STATUS_ICONS = {
   scheduled: "/assets/icons/check.svg",
   pending: "/assets/icons/pending.svg",
   cancelled: "/assets/icons/cancelled.svg",
-};
+} as const;

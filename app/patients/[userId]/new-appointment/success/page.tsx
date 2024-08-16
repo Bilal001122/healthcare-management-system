@@ -61,7 +61,7 @@ export default async function Page({
         </div>
         <p>{formatDateTime(appointment!.schedule).dateTime}</p>
       </div>
-      <Button variant={"default"} asChild>
+      <Button variant={"default"} className="mt-5" asChild>
         <Link href={`/patients/${userId}/new-appointment`}>
           New Appointment
         </Link>

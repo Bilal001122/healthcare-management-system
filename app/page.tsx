@@ -2,10 +2,17 @@ import PatientForm from "@/components/forms/PatientForm";
 import Image from "next/image";
 import Link from "next/link";
 import onBardingImg from "@/public/assets/images/onboarding-img.png";
+import PassKeyModal from "@/components/shared/PassKeyModal";
 
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  const isAdmin = searchParams.admin === "true";
   return (
     <div className="flex-1 flex">
+      {isAdmin && <PassKeyModal />}
       <div className="custom-scrollbar flex-1 md:w-[50%] flex flex-col overflow-y-auto px-10 md:px-12 xl:px-32 py-6">
         <div className="flex flex-col flex-1 justify-between">
           <Image

@@ -22,7 +22,7 @@ export default async function Page({
           className="object-contain mt-5"
         />
 
-        <RegisterForm user={user} />
+        <RegisterForm user={user!} />
       </div>
       <div className="relative w-[30%] hidden md:block">
         <Image
