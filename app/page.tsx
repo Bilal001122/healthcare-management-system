@@ -13,7 +13,7 @@ export default function Page({
   return (
     <div className="flex-1 flex">
       {isAdmin && <PassKeyModal />}
-      <div className="custom-scrollbar flex-1 md:w-[50%] flex flex-col overflow-y-auto px-10 md:px-12 xl:px-32 py-6">
+      <div className="custom-scrollbar flex-1 md:w-[50%] flex flex-col overflow-y-auto px-10 md:px-12 xl:px-32 py-6 custom-scrollbar h-screen">
         <div className="flex flex-col flex-1 justify-between">
           <Image
             src={"/assets/icons/logo-full.svg"}
@@ -31,7 +31,7 @@ export default function Page({
             </p>
             <Link
               href="/?admin=true"
-              className="text-primary px-4 py-2 rounded-md hover:bg-popover"
+              className="text-primary px-4 py-2 rounded-md hover:bg-primary/10"
             >
               Admin
             </Link>
