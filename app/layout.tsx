@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
+import clsx from "clsx";
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={cn(
+        className={clsx(
           "h-screen font-sans antialiased flex flex-col max-w-screen-2xl mx-auto bg-background remove-scrollbar overflow-hidden",
           fontSans.variable
         )}

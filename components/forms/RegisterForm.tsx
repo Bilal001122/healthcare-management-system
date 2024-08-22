@@ -16,6 +16,7 @@ import { Select, SelectItem } from "../ui/select";
 import Image from "next/image";
 import FileUploader from "../shared/FileUploader";
 import { register } from "module";
+import { Gender, User } from "@/types";
 
 const formSchema = z.object({
   name: z

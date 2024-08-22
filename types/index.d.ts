@@ -1,3 +1,5 @@
+import { Appointment } from "./appwrite.types";
+
 declare type Gender = "Male" | "Female";
 declare type Status = "pending" | "scheduled" | "cancelled";
 
@@ -45,7 +47,6 @@ declare type CreateAppointmentParams = {
 declare type UpdateAppointmentParams = {
   appointmentId: string;
   userId: string;
-  timeZone: string;
   appointment: Appointment;
   type: string;
 };

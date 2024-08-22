@@ -2,18 +2,22 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Form } from "@/components/ui/form";
 import CustomFormField from "../shared/CustomFormField";
 import SubmitButton from "../shared/SubmitButton";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormFieldType } from "./PatientForm";
 import { DOCTORS } from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { createAppointment } from "@/lib/actions/appointment.actions";
+import {
+  createAppointment,
+  updateAppointment,
+} from "@/lib/actions/appointment.actions";
+import { Appointment } from "@/types/appwrite.types";
+import { Status } from "@/types";
 
 const CreateAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
@@ -60,10 +64,14 @@ export default function AppointmentForm({
   userId,
   patientId,
   type,
+  appointment,
+  setOpen,
 }: {
   userId: string;
   patientId?: string;
   type: "create" | "cancel" | "schedule";
+  appointment?: Appointment;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -113,6 +121,24 @@ export default function AppointmentForm({
             `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`
           );
         }
+      } else {
+        const appointmentToUpdate = {
+          userId,
+          appointmentId: appointment?.$id!,
+          appointment: {
+            primaryPhysician: values.primaryPhysician,
+            schedule: new Date(values.schedule),
+            status,
+            cancellationReason: values.cancellationReason,
+          },
+          type,
+        };
+        const updatedAppointment = await updateAppointment(appointmentToUpdate);
+
+        if (updatedAppointment) {
+          setOpen && setOpen(false);
+          form.reset();
+        }
       }
     } catch (error) {
       console.log(error);
@@ -132,12 +158,14 @@ export default function AppointmentForm({
 
   return (
     <Form {...form}>
-      <section className="flex flex-col gap-4">
-        <h1 className="text-2xl md:text-3xl font-bold">Hi there ...</h1>
-        <p className="text-dark-700 text-base">
-          Request a new appointment in 10 seconds.
-        </p>
-      </section>
+      {type === "create" && (
+        <section className="flex flex-col gap-4">
+          <h1 className="text-2xl md:text-3xl font-bold">Hi there ...</h1>
+          <p className="text-dark-700 text-base">
+            Request a new appointment in 10 seconds.
+          </p>
+        </section>
+      )}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {type !== "cancel" && (
           <>

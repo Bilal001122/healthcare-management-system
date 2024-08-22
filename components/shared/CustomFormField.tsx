@@ -160,29 +160,33 @@ function RenderField({
           />
           <FormControl>
             <Popover>
-              <PopoverTrigger asChild>
+              <PopoverTrigger className="pointer-events-auto" asChild>
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-full h-10 px-3 py-2 justify-start text-left font-normal bg-input border-inputBorder hover:bg-primary/10 border-[1px] text-sm",
+                    "w-full h-10 px-3 py-2 justify-start text-left font-normal bg-input border-inputBorder hover:bg-primary/10 border-[1px] text-sm cursor-pointer pointer-events-auto",
                     !field.value && "text-muted-foreground"
                   )}
+                  asChild
                 >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {field.value ? (
-                    format(field.value, "PPP")
-                  ) : (
-                    <span>{props.placeholder}</span>
-                  )}
+                  <div>
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {field.value ? (
+                      format(field.value, "PPP")
+                    ) : (
+                      <span>{props.placeholder}</span>
+                    )}
+                  </div>
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="p-0">
+              <PopoverContent className="pointer-events-auto p-0">
                 <Calendar
                   mode="single"
                   selected={field.value}
                   onSelect={field.onChange}
                   initialFocus
                   captionLayout="dropdown-buttons"
+                  className="pointer-events-auto"
                 />
               </PopoverContent>
             </Popover>
