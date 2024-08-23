@@ -22,10 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html
+      className="h-full overflow-clip"
+      lang="en"
+      suppressHydrationWarning={true}
+    >
       <body
         className={clsx(
-          "h-screen font-sans antialiased flex flex-col max-w-screen-2xl mx-auto bg-background remove-scrollbar overflow-hidden",
+          "h-full font-sans antialiased flex flex-col max-w-screen-2xl mx-auto bg-background",
           fontSans.variable
         )}
       >

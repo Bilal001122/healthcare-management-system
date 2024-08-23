@@ -20,7 +20,7 @@ export default async function Page({
     (doc) => doc.name === appointment?.primaryPhysician
   );
   return (
-    <div className="flex h-screen flex-1 flex-col items-center justify-center px-10 py-10 gap-8 custom-scrollbar">
+    <div className="flex h-full flex-1 flex-col items-center justify-center px-10 py-10 gap-8 custom-scrollbar overflow-auto">
       <Image
         src="/assets/icons/logo-full.svg"
         width={200}

@@ -12,7 +12,7 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col flex-1 px-4 py-4 custom-scrollbar overflow-auto">
-      <header className="flex justify-between items-center bg-input drop-shadow-2xl py-2 px-4 rounded-xl">
+      <header className="sticky top-4 flex justify-between items-center bg-input drop-shadow-2xl py-2 px-4 rounded-xl">
         <Link href={"/"}>
           <Image
             src={"/assets/icons/logo-full.svg"}

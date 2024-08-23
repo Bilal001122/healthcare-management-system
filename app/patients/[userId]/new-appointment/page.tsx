@@ -12,8 +12,8 @@ export default async function Page({
   const patient = await getPatient(userId);
 
   return (
-    <div className="flex flex-1">
-      <div className="flex flex-col flex-1 justify-start gap-16 h-screen overflow-auto px-10 md:px-12 xl:px-32 py-6 overflow-y-auto custom-scrollbar">
+    <div className="flex h-full">
+      <div className="flex flex-col flex-1 justify-start gap-16 h-full overflow-auto px-10 md:px-12 xl:px-32 py-6 overflow-y-auto custom-scrollbar">
         <Image
           src={"/assets/icons/logo-full.svg"}
           width={200}

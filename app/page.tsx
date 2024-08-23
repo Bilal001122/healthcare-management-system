@@ -11,9 +11,9 @@ export default function Page({
 }) {
   const isAdmin = searchParams.admin === "true";
   return (
-    <div className="flex-1 flex">
+    <div className="flex h-full">
       {isAdmin && <PassKeyModal />}
-      <div className="custom-scrollbar flex-1 md:w-[50%] flex flex-col overflow-y-auto px-10 md:px-12 xl:px-32 py-6 custom-scrollbar h-screen">
+      <div className="md:w-[50%] flex flex-col px-10 md:px-12 xl:px-32 py-6  custom-scrollbar overflow-scroll">
         <div className="flex flex-col flex-1 justify-between">
           <Image
             src={"/assets/icons/logo-full.svg"}

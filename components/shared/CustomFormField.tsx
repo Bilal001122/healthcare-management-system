@@ -159,7 +159,7 @@ function RenderField({
             className="object-contain"
           />
           <FormControl>
-            <Popover>
+            <Popover modal={true}>
               <PopoverTrigger className="pointer-events-auto" asChild>
                 <Button
                   variant={"outline"}
