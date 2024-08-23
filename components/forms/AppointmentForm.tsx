@@ -18,6 +18,7 @@ import {
 } from "@/lib/actions/appointment.actions";
 import { Appointment } from "@/types/appwrite.types";
 import { Status } from "@/types";
+import clsx from "clsx";
 
 const CreateAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
@@ -71,7 +72,7 @@ export default function AppointmentForm({
   patientId?: string;
   type: "create" | "cancel" | "schedule";
   appointment?: Appointment;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -80,11 +81,11 @@ export default function AppointmentForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      primaryPhysician: "",
-      schedule: new Date(),
-      reason: "",
-      note: "",
-      cancellationReason: "",
+      primaryPhysician: appointment?.primaryPhysician || "",
+      schedule: appointment?.schedule || new Date(Date.now()),
+      reason: appointment?.reason || "",
+      note: appointment?.note || "",
+      cancellationReason: appointment?.cancellationReason || "",
     },
   });
 
@@ -129,7 +130,9 @@ export default function AppointmentForm({
             primaryPhysician: values.primaryPhysician,
             schedule: new Date(values.schedule),
             status,
+            reason: values.reason,
             cancellationReason: values.cancellationReason,
+            note: values.note,
           },
           type,
         };
@@ -233,10 +236,10 @@ export default function AppointmentForm({
         )}
         <SubmitButton
           isLoading={isLoading}
-          className={cn(
-            type === "cancel" &&
-              "bg-red-700 bg-opacity-70 hover:bg-red-700 hover:bg-opacity-80"
-          )}
+          className={clsx("capitalize", {
+            " bg-red-700 bg-opacity-70 hover:bg-red-700 hover:bg-opacity-80":
+              type === "cancel",
+          })}
         >
           {buttonLabel}
         </SubmitButton>

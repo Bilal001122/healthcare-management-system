@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,7 @@ export default function SubmitButton(props: SubmitButtonProps) {
     <Button
       type="submit"
       size="default"
-      className={cn("w-full text-sm font-bold", props.className)}
+      className={clsx("w-full text-sm font-bold", props.className)}
       disabled={props.isLoading}
     >
       {props.isLoading ? <p>Loading ...</p> : props.children}
