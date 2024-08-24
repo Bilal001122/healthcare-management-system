@@ -5,10 +5,12 @@ import {
   APPOINTMENT_COLLECTION_ID,
   DATABASE_ID,
   databases,
+  messaging,
 } from "../appwrite.config";
 import { Appointment } from "@/types/appwrite.types";
 import { CreateAppointmentParams, UpdateAppointmentParams } from "@/types";
 import { revalidatePath } from "next/cache";
+import { formatDateTime } from "../utils";
 
 export async function createAppointment(
   appointmentData: CreateAppointmentParams
@@ -107,10 +109,34 @@ export async function updateAppointment({
 
     if (!appointment) throw new Error("Appointment not found");
 
-    // SMS notification
+    const messageContent =
+      type === "schedule"
+        ? `Your appointment has been scheduled for ${
+            formatDateTime(appointmentData.schedule).dateTime
+          } with Dr. ${appointmentData.primaryPhysician}`
+        : `Your appointment has been cancelled. Reason: ${appointmentData.cancellationReason}`;
+
+    await sendSMSNotification(userId, messageContent);
 
     revalidatePath("/admin");
     return appointment;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function sendSMSNotification(
+  userId: string,
+  messageContent: string
+) {
+  try {
+    const message = await messaging.createSms(
+      ID.unique(),
+      messageContent,
+      [],
+      [userId]
+    );
+    return message;
   } catch (error) {
     console.error(error);
   }
