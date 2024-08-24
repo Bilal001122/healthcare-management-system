@@ -12,7 +12,7 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col flex-1 px-4 py-4 custom-scrollbar overflow-auto">
-      <header className="sticky top-4 flex justify-between items-center bg-input drop-shadow-2xl shadow-2xl py-2 px-4 rounded-xl z-50">
+      <header className="hidden sticky top-4 justify-between items-center bg-input drop-shadow-2xl shadow-2xl py-2 px-4 rounded-xl z-50 sm:flex">
         <Link href={"/"}>
           <Image
             src={"/assets/icons/logo-full.svg"}
@@ -32,7 +32,7 @@ export default async function Page() {
             Start day by checking the latest updates on the platform.
           </p>
         </section>
-        <section className="flex justify-between gap-5">
+        <section className="flex flex-col justify-between gap-5 sm:flex-row">
           <StatsCard
             type="appointments"
             count={appointments?.scheduledCount!}
